@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+:root {
+  --color-primary: #4f46e5; /* Indigo-600 */
+  --color-primary-dark: #4338ca; /* Indigo-700 */
+  --color-text: #111827; /* Gray-900 */
+  --color-text-light: #6b7280; /* Gray-500 */
+  --color-bg: #f9fafb; /* Gray-50 */
+  --color-white: #ffffff;
+  --color-border: #e5e7eb; /* Gray-200 */
+  --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #1f2937;
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4f46e5;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav a {
+  color: #4b5563;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #4f46e5;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #4f46e5;
+  cursor: pointer;
+}
