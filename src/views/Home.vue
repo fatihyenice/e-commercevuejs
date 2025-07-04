@@ -4,7 +4,9 @@
             <h1>FatihWhey<br /><span class="highlight">Booste ta performance</span></h1>
             <p>Découvre nos protéines de qualité premium de musculation.
                 de récupération.</p>
-            <button class="btn-primary">Voir les produits</button>
+            <router-link to="/produit">
+                <button class="btn-primary">Voir les produits</button>
+            </router-link>
         </div>
     </section>
 
