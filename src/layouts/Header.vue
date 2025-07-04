@@ -1,13 +1,15 @@
 <template>
     <header class="header">
         <div class="container">
-            <h1 class="logo">FatihShop</h1>
+            <router-link to="/" class="logo">FatihShop</router-link>
             <nav class="nav">
-                <a href="#">Accueil</a>
-                <a href="#">Produits</a>
-                <a href="#">Panier</a>
-                <a href="#">Contact</a>
+                <menulien v-for="link in routes" :key="link.name" :name="link.name" :url="link.path" />
             </nav>
         </div>
     </header>
 </template>
+
+<script setup>
+import menulien from '@/components/menulien.vue';
+import { routes } from '@/routes/routes';
+</script>

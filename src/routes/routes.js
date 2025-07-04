@@ -1,7 +1,7 @@
 import Home from "@/views/Home.vue"
-import Teste from "@/views/Teste.vue"
+import Products from "@/views/Products.vue"
 
 export const routes = [
-    { path: "/", component: Home },
-    { path: "/teste", component: Teste },
+    { path: "/", component: Home, name: "Accueil" },
+    { path: "/produit", component: Products, name: "Nos produits"  },
 ]
