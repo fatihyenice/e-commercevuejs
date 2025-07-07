@@ -262,6 +262,143 @@ a {
   max-width: 600px;
 }
 
+.panier {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin: 5rem auto;
+}
+
+.liste-produits {
+  flex: 2;
+}
+
+.liste-produits h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.carte-produit-panier {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px var(--color-shadow);
+}
+
+.carte-produit-panier img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.infos-produit-panier h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.infos-produit-panier .prix {
+  color: var(--color-accent);
+  font-weight: 500;
+  margin: 0.2rem 0;
+}
+
+.infos-produit-panier .quantite {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+.resume-panier {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+}
+
+.resume-panier h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.resume-panier p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.resume-panier .total {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.resume-panier .valeur {
+  color: var(--color-accent);
+}
+
+.resume-panier .btn-primary {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.connexion {
+  background: #f9f9f9;
+  margin-top: 30px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.connexion-form {
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.03);
+  padding: 30px;
+  border-radius: 0 0 50px 50px;
+}
+
+.connexion-form form {
+  display: flex;
+  gap: 7px;
+  flex-direction: column;
+}
+
+.connexion-form form label {
+  font-family: var(--font-sans);
+  color: var(--color-accent-dark);
+}
+
+.connexion-form form input {
+  padding: 17px;
+  border: 1px solid #dedede;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+
+.connexion-form form input:focus {
+  background: #f9f9f9;
+  outline: none;
+}
+
+#connexion-btn {
+  margin-top: 15px;
+}
+
 @media (min-width: 980px) {
   .hero h1 {
     font-size: 2.5rem;
