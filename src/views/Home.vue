@@ -55,7 +55,5 @@
 </template>
 
 <script setup>
-import boutton from '@/components/boutton.vue';
-
-
+import boutton from '@/components/boutton.vue'; 
 </script>
