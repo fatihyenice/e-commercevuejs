@@ -1,4 +1,5 @@
 import { app } from "@/axios-config/config";
+import { watch } from "vue";
 
 export async function fetchProducts(){
     try {
@@ -18,4 +19,24 @@ export async function fetchAllProducts(){
         console.error('Erreur lors de la récupération des produits :', error)
         throw error
     }
+}
+
+export function setupFiltre(filtreActif, allProducts, filteredProducts) {
+    return watch(filtreActif, (nouveauFiltre) => {
+        switch (nouveauFiltre) {
+        case 'moinsTrente':
+            filteredProducts.value = allProducts.value.filter(p => p.prix < 30);
+            break;
+        case 'trenteCinquante':
+            filteredProducts.value = allProducts.value.filter(p => p.prix >= 30 && p.prix <= 50);
+            break;
+        case 'cinquantePlus':
+            filteredProducts.value = allProducts.value.filter(p => p.prix > 50);
+            break;
+        case 'nofiltre':
+        default:
+            filteredProducts.value = allProducts.value;
+            break;
+        }
+    });
 }

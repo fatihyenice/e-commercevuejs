@@ -6,41 +6,51 @@
                 <h3>Filtrer par</h3>
                 <div class="filtre-section">
                     <label>
-                        <input type="checkbox" />
-                        Moins de 30 € {{ }}
+                        <input type="radio" name="filtre-prix" value="moinsTrente" v-model="filtreActif" />
+                        Moins de 30 €
                     </label>
                     <label>
-                        <input type="checkbox" />
+                        <input type="radio" name="filtre-prix" value="trenteCinquante" v-model="filtreActif" />
                         30 € - 50 €
                     </label>
                     <label>
-                        <input type="checkbox" />
+                        <input type="radio" name="filtre-prix" value="cinquantePlus" v-model="filtreActif" />
                         Plus de 50 €
+                    </label>
+                    <label>
+                        <input type="radio" name="filtre-prix" value="nofiltre" v-model="filtreActif" />
+                        Aucun filtres
                     </label>
                 </div>
             </aside>
 
             <div class="grid">
-                <productCard :nom="produit.nom_produit" :prix="produit.prix" :urlimage="produit.url"
-                    v-for="produit in allProducts" :key="produit.id_produit" />
+                <productCard v-for="produit in filteredProducts" :key="produit.id_produit" :nom="produit.nom_produit"
+                    :prix="produit.prix" :urlimage="produit.url" />
             </div>
         </div>
     </main>
 </template>
 
 <script setup>
-import { fetchAllProducts } from '@/services/produitService';
+import { onMounted, ref, watch } from 'vue';
+import { fetchAllProducts, setupFiltre } from '@/services/produitService';
 import productCard from '@/components/product-card.vue';
-import { onMounted, ref } from 'vue';
 
 const allProducts = ref([]);
+const filteredProducts = ref([]);
+const filtreActif = ref('nofiltre');
+
+setupFiltre(filtreActif, allProducts, filteredProducts);
 
 onMounted(async () => {
     try {
         const res = await fetchAllProducts();
         allProducts.value = res;
+        filteredProducts.value = res;
     } catch (e) {
-        console.error("Impossible de récuperer toute la liste de produits !");
+        console.error('Impossible de récuperer toute la liste de produits !');
     }
-})
+});
+
 </script>
