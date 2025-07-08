@@ -225,6 +225,7 @@ a {
 
 .page-produit {
   display: flex;
+  flex-direction: column;
   gap: 3rem;
   max-width: 1200px;
   margin: 5rem auto;
@@ -237,7 +238,7 @@ a {
   max-width: 500px;
   border-radius: var(--radius);
   box-shadow: 0 6px 20px var(--color-shadow);
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .infos-produit h2 {
@@ -297,7 +298,7 @@ a {
 .carte-produit-panier img {
   width: 100px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 12px;
 }
 
@@ -444,9 +445,28 @@ img {
   max-width: 100%;
 }
 
+.btn-refresh {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #0d6efd;
+  color: white;
+  font-family: var(--font-sans);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 1;
+}
+.btn-refresh:hover {
+  background-color: #084cd6;
+}
+
 @media (min-width: 980px) {
   .hero h1 {
     font-size: 2.5rem;
+  }
+
+  .page-produit {
+    flex-direction: row;
   }
 
   .nav {

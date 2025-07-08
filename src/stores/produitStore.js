@@ -1,5 +1,5 @@
-import { defineStore } from "pinia"; 
-import { getProduct } from "@/services/produitService";
+import { FetchgetProduct } from "@/services/produitService";
+import { defineStore } from "pinia";  
 import { ref } from "vue";
 
 export const produitsStores = defineStore('produit', () => {
@@ -7,7 +7,7 @@ export const produitsStores = defineStore('produit', () => {
 
     const recupId = async (id) => {
         try {
-            const data = await getProduct(id);
+            const data = await FetchgetProduct(id);
             produit.value = data;
         } catch (error) {
             console.log("Impossible de récupérer le produit :", error);

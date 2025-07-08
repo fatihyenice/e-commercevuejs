@@ -10,6 +10,6 @@ export const routes = [
     { path: "/produit", component: Products, name: "Nos produits", ignored: false }, 
     { path: "/connexion", component: Connexion, name: "Connexion", ignored: false }, 
     { path: "/inscription", component: Inscription, name: "Inscription", ignored: false }, 
-    { path: "/panier", component: Panier, name: "Panier", ignored: false }, 
+    { path: "/panier", component: Panier, name: "Panier", ignored: true }, 
     { path: "/produit-detail/:id", component: ProductsDetail, name: "Détail des produits", ignored: true }, 
 ]

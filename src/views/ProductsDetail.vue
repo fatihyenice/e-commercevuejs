@@ -9,7 +9,7 @@
             <p class="description">
                 {{ produit.produit.description }}
             </p>
-            <button class="btn-primary">Ajouter au panier</button>
+            <boutton class="btn-secondary">Ajouter au panier</boutton>
         </div>
     </main>
 
@@ -25,6 +25,7 @@ import { produitsStores } from '@/stores/produitStore';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import notfound from '/src/assets/images/404.png'
+import boutton from '@/components/button.vue';
 
 const produit = produitsStores();
 const route = useRoute();

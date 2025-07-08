@@ -41,7 +41,7 @@ export function setupFiltre(filtreActif, allProducts, filteredProducts) {
     });
 }
 
-export async function getProduct(productId){
+export async function FetchgetProduct(productId){
     try {
         const response = await app.post("/api/products/idproduct", {
             idproduct: productId
