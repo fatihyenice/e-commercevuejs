@@ -1,43 +1,46 @@
 <template>
-    <main class="products">
+    <main class="products-with-filters">
         <h2>Tous nos produits</h2>
-        <div class="grid">
-            <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/71-Pq1fOnzL._UF1000,1000_QL80_.jpg" alt="Produit 1" />
-                <h3>Produit 1</h3>
-                <p>25 €</p>
-                <router-link to="/produit-detail/1">
-                    <button class="btn-secondary">Voir plus</button>
-                </router-link>
-            </div>
-            <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/71-Pq1fOnzL._UF1000,1000_QL80_.jpg" alt="Produit 2" />
-                <h3>Produit 2</h3>
-                <p>30 €</p>
-                <router-link to="/produit-detail/1">
-                    <button class="btn-secondary">Voir plus</button>
-                </router-link>
-            </div>
-            <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/71-Pq1fOnzL._UF1000,1000_QL80_.jpg" alt="Produit 3" />
-                <h3>Produit 3</h3>
-                <p>40 €</p>
-                <router-link to="/produit-detail/1">
-                    <button class="btn-secondary">Voir plus</button>
-                </router-link>
-            </div>
-            <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/71-Pq1fOnzL._UF1000,1000_QL80_.jpg" alt="Produit 4" />
-                <h3>Produit 4</h3>
-                <p>50 €</p>
-                <router-link to="/produit-detail/1">
-                    <button class="btn-secondary">Voir plus</button>
-                </router-link>
+        <div class="products-layout">
+            <aside class="filtre-bloc">
+                <h3>Filtrer par</h3>
+                <div class="filtre-section">
+                    <label>
+                        <input type="checkbox" />
+                        Moins de 30 € {{ }}
+                    </label>
+                    <label>
+                        <input type="checkbox" />
+                        30 € - 50 €
+                    </label>
+                    <label>
+                        <input type="checkbox" />
+                        Plus de 50 €
+                    </label>
+                </div>
+            </aside>
+
+            <div class="grid">
+                <productCard :nom="produit.nom_produit" :prix="produit.prix" :urlimage="produit.url"
+                    v-for="produit in allProducts" :key="produit.id_produit" />
             </div>
         </div>
     </main>
 </template>
 
 <script setup>
+import { fetchAllProducts } from '@/services/produitService';
+import productCard from '@/components/product-card.vue';
+import { onMounted, ref } from 'vue';
 
+const allProducts = ref([]);
+
+onMounted(async () => {
+    try {
+        const res = await fetchAllProducts();
+        allProducts.value = res;
+    } catch (e) {
+        console.error("Impossible de récuperer toute la liste de produits !");
+    }
+})
 </script>

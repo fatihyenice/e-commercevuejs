@@ -13,34 +13,8 @@
     <section class="products">
         <h2>Nos meilleures protéines</h2>
         <div class="grid">
-            <article class="product-card">
-                <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=600&q=80"
-                    alt="Whey Isolate Vanille" />
-                <h3>Whey Isolate Vanille</h3>
-                <p>39,90 €</p>
-                <boutton>Ajouter au panier</boutton>
-            </article>
-            <article class="product-card">
-                <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=600&q=80"
-                    alt="Whey Chocolat" />
-                <h3>Whey Protéine Chocolat</h3>
-                <p>34,90 €</p>
-                <boutton>Ajouter au panier</boutton>
-            </article>
-            <article class="product-card">
-                <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=600&q=80"
-                    alt="Protéine Vegan" />
-                <h3>Protéine Vegan Nature</h3>
-                <p>29,90 €</p>
-                <boutton>Ajouter au panier</boutton>
-            </article>
-            <article class="product-card">
-                <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=600&q=80"
-                    alt="Pack découverte" />
-                <h3>Pack Découverte 3 Saveurs</h3>
-                <p>54,90 €</p>
-                <boutton>Ajouter au panier</boutton>
-            </article>
+            <productCard :nom="produit.nom_produit" :prix="produit.prix" :urlimage="produit.url"
+                v-for="produit in produits" :key="produit.id_produit" />
         </div>
     </section>
 
@@ -55,5 +29,19 @@
 </template>
 
 <script setup>
-import boutton from '@/components/boutton.vue'; 
+import productCard from '@/components/product-card.vue';
+import { ref } from 'vue';
+import { onMounted } from 'vue';
+import { fetchProducts } from '@/services/produitService';
+
+const produits = ref([]);
+
+onMounted(async () => {
+    try {
+        const resdata = await fetchProducts();
+        produits.value = resdata
+    } catch (error) {
+        console.error('Erreur lors du chargement des produits', error);
+    }
+}); 
 </script>
