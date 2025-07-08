@@ -1,6 +1,6 @@
 const express = require('express');
 const connec = require('./db.js');
-const produits = require('./produit.js');
+const produits = require('./routes/produit.js');
 const cors = require('cors');
 
 const app = express();

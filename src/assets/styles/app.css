@@ -143,6 +143,7 @@ a {
   padding: 1.5rem;
   box-shadow: 0 6px 20px var(--color-shadow);
   text-align: center;
+  margin-bottom: 25px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -437,6 +438,10 @@ a {
 
 .filtre-section input {
   margin-right: 0.5rem;
+}
+
+img {
+  max-width: 100%;
 }
 
 @media (min-width: 980px) {

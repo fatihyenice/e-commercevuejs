@@ -25,8 +25,10 @@
             </aside>
 
             <div class="grid">
-                <productCard v-for="produit in filteredProducts" :key="produit.id_produit" :nom="produit.nom_produit"
-                    :prix="produit.prix" :urlimage="produit.url" />
+                <router-link :to="`/produit-detail/${produit.id_produit}`" v-for="produit in filteredProducts"
+                    :key="produit.id_produit">
+                    <productCard :nom="produit.nom_produit" :prix="produit.prix" :urlimage="produit.url" />
+                </router-link>
             </div>
         </div>
     </main>

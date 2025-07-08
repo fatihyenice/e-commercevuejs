@@ -40,3 +40,15 @@ export function setupFiltre(filtreActif, allProducts, filteredProducts) {
         }
     });
 }
+
+export async function getProduct(productId){
+    try {
+        const response = await app.post("/api/products/idproduct", {
+            idproduct: productId
+        })
+        return response.data;
+    }catch(e) {
+        console.error("Impossible d'executer la requête !");
+        throw e;
+    }
+}

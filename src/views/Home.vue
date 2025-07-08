@@ -13,8 +13,10 @@
     <section class="products">
         <h2>Nos meilleures protéines</h2>
         <div class="grid">
-            <productCard :nom="produit.nom_produit" :prix="produit.prix" :urlimage="produit.url"
-                v-for="produit in produits" :key="produit.id_produit" />
+            <router-link :to="`/produit-detail/${produit.id_produit}`" v-for="produit in produits"
+                :key="produit.id_produit">
+                <productCard :nom="produit.nom_produit" :prix="produit.prix" :urlimage="produit.url" />
+            </router-link>
         </div>
     </section>
 
