@@ -9,7 +9,10 @@
             <p class="description">
                 {{ produit.produit.description }}
             </p>
-            <boutton class="btn-secondary">Ajouter au panier</boutton>
+            <boutton class="btn-secondary" v-if="authed.logged">Ajouter au panier</boutton>
+            <router-link to="/connexion" v-else>
+                <boutton class="btn-connect">Ajouter au panier</boutton>
+            </router-link>
         </div>
     </main>
 
@@ -26,6 +29,9 @@ import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import notfound from '/src/assets/images/404.png'
 import boutton from '@/components/button.vue';
+import { auth } from '@/stores/authStore';
+
+const authed = auth();
 
 const produit = produitsStores();
 const route = useRoute();

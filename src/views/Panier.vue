@@ -5,15 +5,7 @@
 
             <button class="btn-refresh">Rafraîchir le panier</button>
 
-            <div class="carte-produit-panier">
-                <img src="https://placehold.co/100x100/EEE/31343C" alt="Produit 1">
-                <div class="infos-produit-panier">
-                    <h3>Produit 1</h3>
-                    <p class="prix">25,00 €</p>
-                    <p class="quantite">Quantité : 1</p>
-                </div>
-                <boutton>Retirer</boutton>
-            </div>
+            <cardPanier nom="Protéine whey" prix="32" url="https://placehold.co/100x100/EEE/31343C" quantity="10" />
         </div>
 
         <div class="resume-panier">
@@ -29,4 +21,5 @@
 
 <script setup>
 import boutton from '@/components/button.vue';
+import cardPanier from '@/components/card-panier.vue';
 </script>

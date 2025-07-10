@@ -4,15 +4,28 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import { createPinia } from 'pinia'; 
+import { auth } from './stores/authStore';
 
 const app = createApp(App);
 const pinia = createPinia();
 
+app.use(pinia);
+
+const authStore = auth();   
+
 const router = createRouter({
     history: createWebHistory(),
     routes,
-})
+});
 
-app.use(pinia);
+router.beforeEach(async (to, from, next) => {
+    await authStore.checkSession(); 
+    next();
+});
+
+setInterval(() => {
+    authStore.checkSession();
+}, 60000);
+
 app.use(router);
 app.mount("#app");
