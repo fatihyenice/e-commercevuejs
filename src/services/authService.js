@@ -29,3 +29,18 @@ export async function logout(){
         throw e
     }
 }
+
+export async function registerService(nom, prenom, mail, mdpun, mdpdeux){
+    try {
+        const response = await app.post('/api/auth/register', {
+            name: nom,
+            lastname: prenom,
+            email: mail,
+            mdpunn: mdpun,
+            mdpdeuxx: mdpdeux
+        })
+        return response.data
+    }catch(e) {
+        throw e
+    }
+}

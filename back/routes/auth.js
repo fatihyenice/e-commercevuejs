@@ -51,6 +51,7 @@ router.post('/checksession', (req, res) => {
         return res.status(200).json({connected: false})
     }
 });
+
 router.post('/logout', (req, res) => {
     if (req.session.logged) {
         req.session.destroy(err => {
@@ -63,6 +64,57 @@ router.post('/logout', (req, res) => {
     } else { 
         return res.status(200).json({ connected: false, message: "Pas de session active." });
     }
+});
+
+router.post('/register', (req, res) => { 
+    const { email, name, lastname, mdpunn, mdpdeuxx } = req.body;
+
+    if (!email || !name || !lastname || !mdpunn || !mdpdeuxx) {
+        return res.status(400).json({ message: "Adresse mail, nom, prénom et/ou mot de passe requis !" });
+    }
+
+    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\-'\s]{2,30}$/;
+
+    if (!nameRegex.test(name) || !nameRegex.test(lastname)) {
+        return res.status(400).json({ message: "Le nom ou le prénom contient des caractères invalides." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if(!emailRegex.test(email)){
+        return res.status(400).json({ message: "Adresse mail invalide." });
+    }
+
+    if (mdpunn !== mdpdeuxx) {
+        return res.status(400).json({ message: "Les mots de passe ne correspondent pas !" });
+    }
+
+    const reqq = "SELECT email FROM users WHERE email = ?";
+    const mail = [email]
+
+    connect.query(reqq, mail, (err,resultats) => {
+       if(resultats.length > 0) {
+        return res.status(400).json({ message: "L'adresse mail est indisponible !" });
+       }
+
+        bcrypt.hash(mdpunn, 10, (err, hash) => {
+            if (err) {
+                console.error("Erreur de hashage :", err);
+                return res.status(500).json({ message: "Erreur lors du hashage du mot de passe" });
+            }
+
+            const sql = "INSERT INTO users(nom,prenom, email, password, role) VALUES (?,?,?,?,?)";
+            const donnees = [name,lastname,email, hash, "utilisateur"];  
+
+            connect.query(sql, donnees, (err, resultats) => {
+                if (err) {
+                    console.error("Erreur lors de l'insertion en base :", err);
+                    return res.status(500).json({ message: "Erreur lors de la création du compte" });
+                }
+
+                res.status(201).json({ message: "Utilisateur enregistré avec succès !" });
+            });
+        });
+    });
 });
 
 

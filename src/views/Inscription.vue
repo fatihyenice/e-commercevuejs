@@ -4,19 +4,22 @@
             <h2>Inscription</h2>
         </section>
 
+        <alertErreurVue v-if="authed.errorregister">{{ authed.errorregister }}</alertErreurVue>
+        <alertSuccessVue v-if="authed.successegister">{{ authed.successegister }}</alertSuccessVue>
+
         <div class="connexion-form">
-            <form method="POST">
+            <form method="POST" @submit.prevent="authed.register">
                 <label>Votre nom: </label>
-                <input type="text" placeholder="Yenice">
+                <input type="text" v-model="authed.nomregister" placeholder="Yenice">
                 <label>Votre prénom: </label>
-                <input type="text" placeholder="Fatih">
+                <input type="text" v-model="authed.prenomregister" placeholder="Fatih">
                 <label>Votre adresse mail: </label>
-                <input type="email" placeholder="azerty@exemple.com">
+                <input type="email" v-model="authed.mailregister" placeholder="azerty@exemple.com">
                 <label>Votre mot de passe: </label>
-                <input type="password" placeholder="********">
+                <input type="password" v-model="authed.mdpregister" placeholder="********"> 
                 <label>Répetez votre mot de passe: </label>
-                <input type="password" placeholder="********">
-                <button type="button" class="btn-primary" id="connexion-btn">M'inscrire</button>
+                <input type="password" placeholder="********"  v-model="authed.mdpdeuxregister">
+                <button type="submit" class="btn-primary" id="connexion-btn" :disabled="!authed.nomregister || !authed.prenomregister || !authed.mailregister || !authed.mdpregister || !authed.mdpdeuxregister">M'inscrire</button>
             </form>
         </div>
     </div>
@@ -31,6 +34,8 @@
 </template>
 
 <script setup>
+import alertErreurVue from "@/components/alert-erreur.vue";
+import alertSuccessVue from "@/components/alert-success.vue"; 
 import { auth } from "@/stores/authStore";
-const authed = auth();
+const authed = auth(); 
 </script>

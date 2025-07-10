@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, watch } from "vue";
-import { logginService, logout, checkedSession } from "@/services/authService"; 
-import { useRouter } from "vue-router";
+import { logginService, logout, checkedSession, registerService } from "@/services/authService";  
 
 export const auth = defineStore('authstore', () => {
     const alerterror = ref(false);
@@ -55,6 +54,33 @@ export const auth = defineStore('authstore', () => {
  
     checkSession();
 
+    // Inscription
+    const nomregister = ref('');
+    const prenomregister = ref('');
+    const mailregister = ref('');
+    const mdpregister = ref('');
+    const mdpdeuxregister = ref('');
+    const errorregister = ref('');
+    const successegister = ref('');
+
+    const register = async() => {
+        try {
+            const response = await registerService(nomregister.value, prenomregister.value, mailregister.value, mdpregister.value, mdpdeuxregister.value);
+            
+            successegister.value = response.message;
+            errorregister.value = false;
+
+            nomregister.value = "";
+            prenomregister.value = "";
+            mailregister.value = "";
+            mdpregister.value = "";
+            mdpdeuxregister.value = "";
+        }catch(e) {
+            errorregister.value = e.response.data.message;
+            successegister.value = false;
+        }
+    }
+
     return {
         loggin,
         alerterror,
@@ -64,5 +90,13 @@ export const auth = defineStore('authstore', () => {
         checkSession,
         logoutAction,
         logged, 
+        nomregister,
+        prenomregister,
+        mailregister,
+        mdpregister,
+        mdpdeuxregister,
+        register,
+        errorregister,
+        successegister
     }
 })
