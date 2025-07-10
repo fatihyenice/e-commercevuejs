@@ -1,33 +1,47 @@
 <template>
-    <section class="panier container">
+    <section class="panier container" v-if="authed.logged">
         <div class="liste-produits">
             <h2>Votre Panier</h2>
 
-            <button class="btn-refresh">Rafraîchir le panier</button>
+            <button class="btn-refresh" @click="panier.refresh">Rafraîchir le panier</button>
 
-            <cardPanier v-if="panier.mypanier" nom="Protéine whey" prix="32" url="https://placehold.co/100x100/EEE/31343C" quantity="10" />
+            <cardPanier v-for="produit in panier.mypanier" :key="produit.id_panier" :nom="produit.nom_produit" :prix="produit.prix" :url="produit.url" :quantity="produit.quantity" /> 
         </div>
 
         <div class="resume-panier">
             <h3>Résumé</h3>
-            <p>Sous-total : <span class="valeur">105,00 €</span></p>
+            <p>Sous-total : <span class="valeur">{{ total.toFixed(2) }} €</span></p>
             <p>Livraison : <span class="valeur">Gratuite</span></p>
             <hr>
-            <p class="total">Total : <span class="valeur">105,00 €</span></p>
+            <p class="total">Total : <span class="valeur">{{ total.toFixed(2) }} €</span></p>
             <boutton>Valider la commande</boutton>
         </div>
     </section>
+
+    <div v-else>
+        <router-link to="/connexion">
+            <div class="alert-error">
+                Vous devez vous connecter pour pouvoir afficher votre panier. Cliquez ici.
+            </div>
+        </router-link>
+    </div>
 </template>
 
 <script setup>
 import boutton from '@/components/button.vue';
 import cardPanier from '@/components/card-panier.vue';
+import { auth } from '@/stores/authStore';
 import { panierStore } from '@/stores/panierStore'; 
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue'; 
 
 const panier = panierStore();
-
+const authed = auth();
+ 
 onMounted(() => {
-    panier.getMyPanier();
-})
+panier.getMyPanier(); 
+});
+
+const total = computed(() =>
+  panier.mypanier.reduce((acc, produit) => acc + produit.prix * produit.quantity, 0)
+);
 </script>

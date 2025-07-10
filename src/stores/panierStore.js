@@ -3,12 +3,13 @@ import { defineStore } from "pinia"
 import { ref, watch } from "vue" 
 import { useRoute } from "vue-router";
 import { fetchGetPanier } from "@/services/panierService";
+import { addproduitpanier } from "@/services/panierService";
 import { auth } from "./authStore";
 
 export const panierStore = defineStore('panierStore', () =>{
     const count = ref(0);
     const route = useRoute();
-    const mypanier = ref(null);
+    const mypanier = ref([]);
 
     const authed = auth();
 
@@ -32,6 +33,20 @@ export const panierStore = defineStore('panierStore', () =>{
             throw e;
         }
     }
+
+    const refresh = () => {
+        getMyPanier();
+    }
+
+    const ajoutPanier = async(idparam) => {
+        try{
+            const data = await addproduitpanier(idparam); 
+            refresh();
+            countPanier();
+        }catch(e){
+            throw e;
+        }
+    }
  
     watch(authed, (newVal, oldVal) => { 
         if (newVal.logged) {
@@ -45,6 +60,8 @@ export const panierStore = defineStore('panierStore', () =>{
         countPanier,
         count,
         getMyPanier,
-        mypanier
+        mypanier,
+        refresh, 
+        ajoutPanier
     }
 })

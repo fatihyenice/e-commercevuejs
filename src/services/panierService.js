@@ -19,3 +19,14 @@ export async function fetchGetPanier(){
         throw e
     }
 }
+
+export async function addproduitpanier(id){
+    try {
+        const response = await app.post('/api/panier/addpanier', {
+            idProduit: id
+        }) 
+    }catch(e){
+        console.log("Impossible de récuperer le panier");
+        throw e
+    }
+}
