@@ -25,8 +25,20 @@ export async function addproduitpanier(id){
         const response = await app.post('/api/panier/addpanier', {
             idProduit: id
         }) 
+        return response.data
     }catch(e){
         console.log("Impossible de récuperer le panier");
+        throw e
+    }
+}
+
+export async function deleteproduitpanier(id){
+    try{
+        const response = await app.post('/api/panier/deleteproduit', {
+            idProduit: id
+        })
+        return response.data;
+    }catch(e){
         throw e
     }
 }

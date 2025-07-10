@@ -3,9 +3,10 @@
         <div class="liste-produits">
             <h2>Votre Panier</h2>
 
+            <alertSuccessVue v-if="panier.success">{{ panier.success }}</alertSuccessVue>
             <button class="btn-refresh" @click="panier.refresh">Rafraîchir le panier</button>
 
-            <cardPanier v-for="produit in panier.mypanier" :key="produit.id_panier" :nom="produit.nom_produit" :prix="produit.prix" :url="produit.url" :quantity="produit.quantity" /> 
+            <cardPanier v-for="produit in panier.mypanier" :key="produit.id_panier" :nom="produit.nom_produit" :prix="produit.prix" :url="produit.url" :quantity="produit.quantity" @click="panier.deleteProduit(produit.id_produit)"/> 
         </div>
 
         <div class="resume-panier">
@@ -14,7 +15,7 @@
             <p>Livraison : <span class="valeur">Gratuite</span></p>
             <hr>
             <p class="total">Total : <span class="valeur">{{ total.toFixed(2) }} €</span></p>
-            <boutton>Valider la commande</boutton>
+            <boutton @click="validate">Valider la commande</boutton>
         </div>
     </section>
 
@@ -27,12 +28,13 @@
     </div>
 </template>
 
-<script setup>
+<script setup> 
+import alertSuccessVue from '@/components/alert-success.vue';
 import boutton from '@/components/button.vue';
 import cardPanier from '@/components/card-panier.vue';
 import { auth } from '@/stores/authStore';
 import { panierStore } from '@/stores/panierStore'; 
-import { onMounted, computed } from 'vue'; 
+import { onMounted, computed } from 'vue';    
 
 const panier = panierStore();
 const authed = auth();
@@ -44,4 +46,5 @@ panier.getMyPanier();
 const total = computed(() =>
   panier.mypanier.reduce((acc, produit) => acc + produit.prix * produit.quantity, 0)
 );
+ 
 </script>

@@ -1,7 +1,9 @@
-<template>
+<template> 
+    <alertSuccessVue v-if="panier.success">{{ panier.success }}</alertSuccessVue>
     <main class="page-produit" v-if="produit.produit">
+
         <div class="image-produit">
-            <img :src="produit.produit.url" alt="Montre Classique" />
+            <img :src="produit.produit.url" alt="produit.produit.nom_produit" />
         </div>
         <div class="infos-produit">
             <h2>{{ produit.produit.nom_produit }}</h2>
@@ -31,6 +33,7 @@ import notfound from '/src/assets/images/404.png'
 import boutton from '@/components/button.vue';
 import { auth } from '@/stores/authStore';
 import { panierStore } from '@/stores/panierStore'; 
+import alertSuccessVue from '@/components/alert-success.vue'; 
 
 const authed = auth(); 
 const produit = produitsStores();

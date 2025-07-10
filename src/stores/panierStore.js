@@ -1,15 +1,16 @@
-import { fetchCountPanier } from "@/services/panierService";
+import { deleteproduitpanier, fetchCountPanier } from "@/services/panierService";
 import { defineStore } from "pinia" 
 import { ref, watch } from "vue" 
 import { useRoute } from "vue-router";
 import { fetchGetPanier } from "@/services/panierService";
 import { addproduitpanier } from "@/services/panierService";
-import { auth } from "./authStore";
+import { auth } from "./authStore"; 
 
 export const panierStore = defineStore('panierStore', () =>{
     const count = ref(0);
     const route = useRoute();
     const mypanier = ref([]);
+    const success = ref(false);
 
     const authed = auth();
 
@@ -41,10 +42,22 @@ export const panierStore = defineStore('panierStore', () =>{
     const ajoutPanier = async(idparam) => {
         try{
             const data = await addproduitpanier(idparam); 
+            success.value = data.message;
             refresh();
             countPanier();
         }catch(e){
             throw e;
+        }
+    }
+
+    const deleteProduit = async(idproduit) => {
+        try{
+            const response = await deleteproduitpanier(idproduit);
+            success.value = response.message;
+            refresh();
+            countPanier();
+        }catch(e){
+            throw e
         }
     }
  
@@ -62,6 +75,8 @@ export const panierStore = defineStore('panierStore', () =>{
         getMyPanier,
         mypanier,
         refresh, 
-        ajoutPanier
+        ajoutPanier,
+        success,
+        deleteProduit
     }
 })

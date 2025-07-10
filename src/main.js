@@ -5,7 +5,7 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import { createPinia } from 'pinia'; 
 import { auth } from './stores/authStore';
-import { panierStore } from './stores/panierStore'; 
+import { panierStore } from './stores/panierStore';  
 
 const app = createApp(App);
 const pinia = createPinia();

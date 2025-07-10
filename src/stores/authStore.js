@@ -17,7 +17,7 @@ export const auth = defineStore('authstore', () => {
             alertsuccess.value = response.message
             alerterror.value = false;
             logged.value = response.id; 
-            checkSession(); 
+            await checkSession(); 
         }catch(e){
             alertsuccess.value = false;
             alerterror.value = "L'utilisateur est introuvable !";

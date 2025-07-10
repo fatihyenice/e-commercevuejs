@@ -68,8 +68,7 @@ router.post("/addpanier", auth, (req, res) => {
         return res.status(200).json({ status: "success", message: "Quantité mise à jour", quantity: newQuantity });
       });
 
-    } else {
-      // Génère un identifiant simple pour numerocommande
+    } else { 
       const numerocommande = `NC-${userId}-${Date.now()}`;
 
       const sqlInsert = `
@@ -87,6 +86,29 @@ router.post("/addpanier", auth, (req, res) => {
   });
 });
 
+router.post('/deleteproduit', auth, (req, res) => {
+  const { idProduit } = req.body;
 
+  if (!idProduit) {
+    return res.status(400).json({ message: "ID produit manquant." });
+  }
+
+  const requeteSuppression = `
+    DELETE FROM panier 
+    WHERE id_produit = ? AND id_users = ?
+  `;
+
+  db.query(requeteSuppression, [idProduit, req.session.logged], (err, resultatSuppression) => {
+    if (err) {
+      return res.status(500).json({ message: "Erreur lors de la suppression." });
+    }
+
+    if (resultatSuppression.affectedRows === 0) {
+      return res.status(404).json({ message: "Aucun produit correspondant trouvé à supprimer." });
+    }
+
+    return res.status(200).json({ message: "Produit supprimé avec succès." });
+  });
+});
 
 module.exports = router;
