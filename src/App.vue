@@ -15,7 +15,7 @@ const authe = auth();
 
 onMounted(async () => {
   try {
-    await panier.countPanier(1);
+    await panier.countPanier();
     await authe.checkSession();
   } catch (e) {
     throw e

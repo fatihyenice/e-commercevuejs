@@ -9,7 +9,7 @@
                 <menulien name="Connexion" url="/connexion" v-if="!authed.logged" />
                 <menulien name="Inscription" url="/inscription" v-if="!authed.logged" />
                 <a href="#" @click="authed.logoutAction" v-if="authed.logged">Déconnexion</a>
-                <menulien :name="`Panier (${total.count}) `" url="/panier" v-if="authed.logged" />
+                <menulien :name="`Panier (${panier.count})`" url="/panier" v-if="authed.logged" />
             </nav>
         </div>
     </header>
@@ -19,10 +19,12 @@
 import menulien from '@/components/menulien.vue';
 import { routes } from '@/routes/routes';
 import { auth } from '@/stores/authStore';
+import { panierStore } from '@/stores/panierStore';
+import { onMounted } from 'vue';
 
-const authed = auth();
-
-const prop = defineProps({
-    total: Object,
+const authed = auth();  
+const panier = panierStore();
+onMounted(() => {
+    panier.countPanier();
 })
 </script>

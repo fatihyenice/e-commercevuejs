@@ -5,6 +5,7 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import { createPinia } from 'pinia'; 
 import { auth } from './stores/authStore';
+import { panierStore } from './stores/panierStore'; 
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -12,6 +13,7 @@ const pinia = createPinia();
 app.use(pinia);
 
 const authStore = auth();   
+const panier = panierStore();
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +22,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     await authStore.checkSession(); 
+    await panier.countPanier();
     next();
 });
 

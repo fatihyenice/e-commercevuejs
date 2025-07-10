@@ -28,8 +28,7 @@ export const auth = defineStore('authstore', () => {
     const checkSession = async() => {
         try {
             const response = await checkedSession();
-            logged.value = response.connected;
-            console.log(logged.value);
+            logged.value = response.connected; 
         }catch(e){
             throw e
         }

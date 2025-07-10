@@ -5,7 +5,7 @@
 
             <button class="btn-refresh">Rafraîchir le panier</button>
 
-            <cardPanier nom="Protéine whey" prix="32" url="https://placehold.co/100x100/EEE/31343C" quantity="10" />
+            <cardPanier v-if="panier.mypanier" nom="Protéine whey" prix="32" url="https://placehold.co/100x100/EEE/31343C" quantity="10" />
         </div>
 
         <div class="resume-panier">
@@ -22,4 +22,12 @@
 <script setup>
 import boutton from '@/components/button.vue';
 import cardPanier from '@/components/card-panier.vue';
+import { panierStore } from '@/stores/panierStore'; 
+import { onMounted } from 'vue';
+
+const panier = panierStore();
+
+onMounted(() => {
+    panier.getMyPanier();
+})
 </script>
