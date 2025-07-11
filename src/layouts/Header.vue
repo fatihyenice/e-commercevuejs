@@ -4,7 +4,8 @@
             <router-link to="/" class="logo">FatihShop</router-link>
             <nav class="nav">
                 <menulien v-for="link in routes.filter(route => !route.ignored)" :key="link.name" :name="link.name"
-                    :url="link.path" />
+                    :url="link.path" /> 
+                <menulien name="Ajouter un produit" url="/add-product" v-if="authed.logged" />
 
                 <menulien name="Connexion" url="/connexion" v-if="!authed.logged" />
                 <menulien name="Inscription" url="/inscription" v-if="!authed.logged" />

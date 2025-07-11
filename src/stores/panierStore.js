@@ -1,4 +1,4 @@
-import { deleteproduitpanier, fetchCountPanier } from "@/services/panierService";
+import { addProduit, deleteproduitpanier, fetchCountPanier } from "@/services/panierService";
 import { defineStore } from "pinia" 
 import { ref, watch } from "vue" 
 import { useRoute } from "vue-router";
@@ -59,6 +59,30 @@ export const panierStore = defineStore('panierStore', () =>{
             throw e
         }
     }
+
+    const erreurAlertAddProd = ref(false);
+    const successAlertAddProd = ref(false);
+
+    const nomproduitadd = ref('');
+    const prixproduitadd = ref('');
+    const urlproduitadd = ref('');
+    const descriptionproduitadd = ref('');
+
+    const ajoutProduit = async() => {
+        try {
+            const response = await addProduit(nomproduitadd.value, prixproduitadd.value, urlproduitadd.value,descriptionproduitadd.value);
+            successAlertAddProd.value = response.message;
+            erreurAlertAddProd.value = false;
+
+            nomproduitadd.value = "";
+            prixproduitadd.value = "";
+            urlproduitadd.value = "";
+            descriptionproduitadd.value = "";
+        }catch(e) {
+            erreurAlertAddProd.value = e.response.data.message
+            successAlertAddProd.value = false;
+        }
+    }
  
     watch(authed, (newVal, oldVal) => { 
         if (newVal.logged) {
@@ -76,6 +100,13 @@ export const panierStore = defineStore('panierStore', () =>{
         refresh, 
         ajoutPanier,
         success,
-        deleteProduit
+        deleteProduit,
+        ajoutProduit,
+        erreurAlertAddProd,
+        successAlertAddProd,
+        nomproduitadd,
+        prixproduitadd,
+        urlproduitadd,
+        descriptionproduitadd
     }
 })

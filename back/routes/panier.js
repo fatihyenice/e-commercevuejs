@@ -111,4 +111,40 @@ router.post('/deleteproduit', auth, (req, res) => {
   });
 });
 
+router.post('/addproduit', (req, res) => {
+  const { nom, prix, url, descrip } = req.body;
+ 
+  if (!nom || !prix || !url || !descrip) {
+    return res.status(400).json({ message: 'Veuillez remplir tous les champs !' });
+  }
+
+  const nomRegex = /^[^<>?]+$/;
+  if (!nomRegex.test(nom) || /<\?php/i.test(nom)) {
+    return res.status(400).json({ message: 'Le nom contient des caractères interdits.' });
+  }
+
+ 
+  const prixRegex = /^\d+(\.\d{1,2})?$/;
+  if (!prixRegex.test(prix)) {
+    return res.status(400).json({ message: 'Prix invalide. Ex : 10 ou 10.99' });
+  } 
+
+  const urlRegex = /^(https?:\/\/)?([\w\-]+\.)+[\w\-]{2,}(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/i;
+  if (!urlRegex.test(url)) {
+    return res.status(400).json({ message: 'URL invalide.' });
+  }
+
+  const sql = 'INSERT INTO produits (nom_produit, prix, description, url) VALUES (?, ?, ?, ?)';
+  const values = [nom, prix, descrip, url];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erreur d’insertion :', err);
+      return res.status(500).json({ message: 'Erreur serveur' });
+    }
+
+    res.status(201).json({ message: 'Produit ajouté', id: result.insertId });
+  });
+});
+
 module.exports = router;

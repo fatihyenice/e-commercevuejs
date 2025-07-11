@@ -42,3 +42,17 @@ export async function deleteproduitpanier(id){
         throw e
     }
 }
+
+export async function addProduit(nom, prix, url, descrip){
+    try{
+        const response = await app.post('/api/panier/addproduit', {
+            nom: nom,
+            prix: prix,
+            url: url,
+            descrip: descrip
+        })
+        return response.data;
+    }catch(e){
+        throw e
+    }
+}
