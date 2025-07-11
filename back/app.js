@@ -18,14 +18,15 @@ app.use(cors({
 app.use(sess);
 
 connec.getConnection((err, connection) => {
-    connection.release();
+    if (connection) connection.release();
 
     if(err){
         console.error("Impossible de se connecter à la base de donnée !");
-    }else{
+    } else {
         console.log("Connexion réussie !");
     }
 })
+
 
 app.use("/api/products", produits);
 app.use("/api/panier", panier);
