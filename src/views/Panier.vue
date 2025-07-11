@@ -3,7 +3,7 @@
         <div class="liste-produits">
             <h2>Votre Panier</h2>
 
-            <alertSuccessVue v-if="panier.success">{{ panier.success }}</alertSuccessVue>
+            <alertSuccessVue :key="authed.timestamp" v-if="panier.success">{{ panier.success }}</alertSuccessVue>
             <button class="btn-refresh" @click="panier.refresh">Rafraîchir le panier</button>
 
             <cardPanier v-for="produit in panier.mypanier" :key="produit.id_panier" :nom="produit.nom_produit" :prix="produit.prix" :url="produit.url" :quantity="produit.quantity" @click="panier.deleteProduit(produit.id_produit)"/> 

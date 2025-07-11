@@ -6,7 +6,7 @@ export const auth = defineStore('authstore', () => {
     const alerterror = ref(false);
     const alertsuccess = ref(false);
     const email = ref('');
-    const password = ref('');  
+    const password = ref('');   
 
     const logged = ref(false);
 
@@ -66,7 +66,7 @@ export const auth = defineStore('authstore', () => {
     const register = async() => {
         try {
             const response = await registerService(nomregister.value, prenomregister.value, mailregister.value, mdpregister.value, mdpdeuxregister.value);
-            
+
             successegister.value = response.message;
             errorregister.value = false;
 
@@ -97,6 +97,6 @@ export const auth = defineStore('authstore', () => {
         mdpdeuxregister,
         register,
         errorregister,
-        successegister
+        successegister, 
     }
 })

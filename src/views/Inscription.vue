@@ -4,8 +4,8 @@
             <h2>Inscription</h2>
         </section>
 
-        <alertErreurVue v-if="authed.errorregister">{{ authed.errorregister }}</alertErreurVue>
-        <alertSuccessVue v-if="authed.successegister">{{ authed.successegister }}</alertSuccessVue>
+        <alertErreurVue :key="authed.errorregister" v-if="authed.errorregister">{{ authed.errorregister }}</alertErreurVue>
+        <alertSuccessVue :key="authed.successegister" v-if="authed.successegister">{{ authed.successegister }}</alertSuccessVue>
 
         <div class="connexion-form">
             <form method="POST" @submit.prevent="authed.register">

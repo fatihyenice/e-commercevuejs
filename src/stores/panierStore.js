@@ -7,8 +7,7 @@ import { addproduitpanier } from "@/services/panierService";
 import { auth } from "./authStore"; 
 
 export const panierStore = defineStore('panierStore', () =>{
-    const count = ref(0);
-    const route = useRoute();
+    const count = ref(0); 
     const mypanier = ref([]);
     const success = ref(false);
 

@@ -1,5 +1,5 @@
 <template> 
-    <alertSuccessVue v-if="panier.success">{{ panier.success }}</alertSuccessVue>
+    <alertSuccessVue :key="panier.success" v-if="panier.success">{{ panier.success }}</alertSuccessVue>
     <main class="page-produit" v-if="produit.produit">
 
         <div class="image-produit">

@@ -23,6 +23,13 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     await authStore.checkSession(); 
     await panier.countPanier();
+    
+    panier.success = false;
+    authStore.alerterror = false;
+    authStore.alertsuccess = false;
+    authStore.errorregister = false;
+    authStore.successegister = false;
+
     next();
 });
 

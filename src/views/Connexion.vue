@@ -4,8 +4,8 @@
             <h2>Connexion</h2>
         </section>
 
-        <alertErreur v-if="authed.alerterror">{{ authed.alerterror }}</alertErreur>
-        <AlertSuccess v-if="authed.alertsuccess">{{ authed.alertsuccess }}</AlertSuccess>
+        <alertErreur :key="authed.alerterror" v-if="authed.alerterror">{{ authed.alerterror }}</alertErreur>
+        <AlertSuccess :key="authed.alertsuccess" v-if="authed.alertsuccess">{{ authed.alertsuccess }}</AlertSuccess>
 
         <div class="connexion-form">
             <form method="POST" @submit.prevent="seConnecter">
