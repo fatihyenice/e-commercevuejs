@@ -111,7 +111,7 @@ router.post('/deleteproduit', auth, (req, res) => {
   });
 });
 
-router.post('/addproduit', (req, res) => {
+router.post('/addproduit', auth, (req, res) => {
   const { nom, prix, url, descrip } = req.body;
  
   if (!nom || !prix || !url || !descrip) {

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const connec = require('./db.js');
 const produits = require('./routes/produit.js');
@@ -30,6 +31,7 @@ app.use("/api/products", produits);
 app.use("/api/panier", panier);
 app.use("/api/auth", auth);
 
-app.listen(3000, () => {
-    console.log(`Serveur démarré et écoute sur le port 3000`);
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Serveur démarré et écoute sur le port ${PORT}`);
+});
