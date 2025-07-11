@@ -1,6 +1,6 @@
 import axios from "axios"
 
 export const app = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://e-commercevuejs.onrender.com",
     withCredentials: true
 })
