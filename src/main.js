@@ -25,6 +25,9 @@ router.beforeEach(async (to, from, next) => {
     await panier.countPanier();
     
     panier.success = false;
+    panier.erreurAlertAddProd = false;
+    panier.successAlertAddProd = false;
+     
     authStore.alerterror = false;
     authStore.alertsuccess = false;
     authStore.errorregister = false;

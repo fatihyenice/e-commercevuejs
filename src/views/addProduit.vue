@@ -48,7 +48,18 @@
           />
         </div>
 
-        <button type="submit" class="btn-primary">Ajouter le produit</button>
+        <button
+          type="submit"
+          class="btn-primary"
+          :disabled="
+            !panier.nomproduitadd ||
+            !panier.prixproduitadd ||
+            !panier.descriptionproduitadd ||
+            !panier.urlproduitadd
+          "
+        >
+          Ajouter le produit
+        </button>
       </form>
     </div>
   </div>
